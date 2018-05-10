@@ -2,19 +2,21 @@ package dk.via.Model;
 
 import java.util.ArrayList;
 
-public class Pallet {
+public class Pallet extends BaseModel {
 
     private ArrayList<Part> parts;
     private double maximumCapacity;
     private int registrationNo;
 
-    public Pallet(ArrayList<Part> parts, double maximumCapacity, int registrationNo) {
+    public Pallet(int id, ArrayList<Part> parts, double maximumCapacity, int registrationNo) {
+        super(id);
         this.parts = parts;
         this.maximumCapacity = maximumCapacity;
         this.registrationNo = registrationNo;
     }
 
-    public Pallet(double maximumCapacity, int registrationNo) {
+    public Pallet(int id, double maximumCapacity, int registrationNo) {
+        super(id);
         this.maximumCapacity = maximumCapacity;
         this.registrationNo = registrationNo;
     }

@@ -1,6 +1,6 @@
 package dk.via.Model;
 
-public class Part {
+public class Part extends BaseModel {
 
     private String name;
     private double weight;
@@ -10,7 +10,8 @@ public class Part {
     private Pallet pallet;
 
 
-    public Part(String name, double weight, Car car, Category category, int registrationNo, Pallet pallet) {
+    public Part(int id, String name, double weight, Car car, Category category, int registrationNo, Pallet pallet) {
+        super(id);
         this.name = name;
         this.weight = weight;
         this.car = car;
@@ -19,7 +20,8 @@ public class Part {
         this.pallet = pallet;
     }
 
-    public Part(String name, double weight, Car car, Category category, int registrationNo) {
+    public Part(int id, String name, double weight, Car car, Category category, int registrationNo) {
+        super(id);
         this.name = name;
         this.weight = weight;
         this.car = car;

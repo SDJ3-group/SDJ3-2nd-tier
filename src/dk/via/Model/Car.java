@@ -1,9 +1,8 @@
 package dk.via.Model;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
-public class Car {
+public class Car extends BaseModel {
 
     private String VIN;
     private String model;
@@ -43,14 +42,16 @@ public class Car {
         this.parts = parts;
     }
 
-    public Car(String VIN, String model, double weight, ArrayList<Part> parts) {
+    public Car(int id, String VIN, String model, double weight, ArrayList<Part> parts) {
+        super(id);
         this.VIN = VIN;
         this.model = model;
         this.weight = weight;
         this.parts = parts;
     }
 
-    public Car(String VIN, String model, double weight) {
+    public Car(int id, String VIN, String model, double weight) {
+        super(id);
         this.VIN = VIN;
         this.model = model;
         this.weight = weight;

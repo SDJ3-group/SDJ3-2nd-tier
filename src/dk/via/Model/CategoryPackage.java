@@ -11,8 +11,8 @@ public class CategoryPackage extends Package {
         return super.getParts();
     }
 
-    public CategoryPackage(ArrayList<Part> parts, Category category) {
-        super(parts);
+    public CategoryPackage(int id, ArrayList<Part> parts, Category category) {
+        super(id, parts);
         this.category = category;
     }
 

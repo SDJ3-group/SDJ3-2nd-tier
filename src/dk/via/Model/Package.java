@@ -2,10 +2,13 @@ package dk.via.Model;
 
 import java.util.ArrayList;
 
-public abstract class Package {
+public abstract class Package extends BaseModel {
+    private int id;
     private ArrayList<Part> parts;
+    private Boolean repacking;
 
-    public Package(ArrayList<Part> parts) {
+    public Package(int id, ArrayList<Part> parts) {
+        super(id);
         this.parts = parts;
     }
 
@@ -17,10 +20,27 @@ public abstract class Package {
         this.parts = parts;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public Boolean getRepacking() {
+        return repacking;
+    }
+
+    public void setRepacking(Boolean repacking) {
+        this.repacking = repacking;
+    }
+
     @Override
     public String toString() {
         return "Package{" +
-                "parts=" + parts +
+                "id=" + id +
+                ", parts=" + parts +
                 '}';
     }
 }

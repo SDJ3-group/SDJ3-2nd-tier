@@ -6,8 +6,8 @@ public class ModelPackage extends Package {
 
     private String model;
 
-    public ModelPackage(ArrayList<Part> parts, String model) {
-        super(parts);
+    public ModelPackage(int id, ArrayList<Part> parts, String model) {
+        super(id, parts);
         this.model = model;
     }
 
