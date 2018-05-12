@@ -63,13 +63,12 @@ public class PackagesAPIService extends APIService {
             String jsonData = responses.body().string();
             Gson gson = new Gson();
             gson.toJson(jsonData);
-            pack = gson.fromJson(jsonData, Package[].class)[0];
+            pack = gson.fromJson(jsonData, Package.class);
             pack.toString();
 
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         return pack;
     }
 

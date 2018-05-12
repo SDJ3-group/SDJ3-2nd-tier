@@ -18,27 +18,27 @@ public class CarsRMIService extends UnicastRemoteObject implements CarsRMIInterf
     }
 
     @Override
-    public Car[] getAllCars() throws RemoteException {
+    public Car[] getAllCars() {
         return carsAPI.getAllCars();
     }
 
     @Override
-    public Car getCar(int id) throws RemoteException {
-        return carsAPI.getCar(id);
+    public Car getCar(String VIN) {
+        return carsAPI.getCar(VIN);
     }
 
     @Override
-    public void updateCar(Car car) throws RemoteException {
+    public void updateCar(Car car) {
         carsAPI.updateCar(car);
     }
 
     @Override
-    public void addCar(Car car) throws RemoteException {
+    public void addCar(Car car) {
         carsAPI.addCar(car);
     }
 
     @Override
-    public void deleteCar(Car car) throws RemoteException {
+    public void deleteCar(Car car) {
         carsAPI.deleteCar(car);
     }
 }

@@ -2,90 +2,69 @@ package dk.via.Model;
 
 public class Part extends BaseModel {
 
-    private String name;
-    private double weight;
-    private Car car;
-    private Category category;
-    private int registrationNo;
-    private Pallet pallet;
+    private String Name;
+    private double Weight;
+    private Car Car;
+    private Pallet Pallet;
+    private Package Package;
 
 
-    public Part(int id, String name, double weight, Car car, Category category, int registrationNo, Pallet pallet) {
+    public Part(int id, String name, double weight, dk.via.Model.Car car, dk.via.Model.Pallet pallet, dk.via.Model.Package aPackage) {
         super(id);
-        this.name = name;
-        this.weight = weight;
-        this.car = car;
-        this.category = category;
-        this.registrationNo = registrationNo;
-        this.pallet = pallet;
+        Name = name;
+        Weight = weight;
+        Car = car;
+        Pallet = pallet;
+        Package = aPackage;
     }
 
-    public Part(int id, String name, double weight, Car car, Category category, int registrationNo) {
+    public Part(int id, String name, double weight, Car car) {
         super(id);
-        this.name = name;
-        this.weight = weight;
-        this.car = car;
-        this.category = category;
-        this.registrationNo = registrationNo;
+        this.Name = name;
+        this.Weight = weight;
+        this.Car = car;
+
     }
 
     public String getName() {
-        return name;
+        return Name;
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.Name = name;
     }
 
     public double getWeight() {
-        return weight;
+        return Weight;
     }
 
     public void setWeight(double weight) {
-        this.weight = weight;
+        this.Weight = weight;
     }
 
     public Car getCar() {
-        return car;
+        return Car;
     }
 
     public void setCar(Car car) {
-        this.car = car;
-    }
-
-    public Category getCategory() {
-        return category;
-    }
-
-    public void setCategory(Category category) {
-        this.category = category;
-    }
-
-    public int getRegistrationNo() {
-        return registrationNo;
-    }
-
-    public void setRegistrationNo(int registrationNo) {
-        this.registrationNo = registrationNo;
+        this.Car = car;
     }
 
     public Pallet getPallet() {
-        return pallet;
+        return Pallet;
     }
 
     public void setPallet(Pallet pallet) {
-        this.pallet = pallet;
+        this.Pallet = pallet;
     }
 
     @Override
     public String toString() {
         return "Part{" +
-                "name='" + name + '\'' +
-                ", weight=" + weight +
-                ", car=" + car +
-                ", category=" + category +
-                ", registrationNo=" + registrationNo +
-                ", pallet=" + pallet +
+                "Name='" + Name + '\'' +
+                ", Weight=" + Weight +
+                ", Car=" + Car +
+                ", Pallet=" + Pallet +
                 '}';
     }
 }

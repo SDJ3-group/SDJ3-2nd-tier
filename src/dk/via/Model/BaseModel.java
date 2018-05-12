@@ -2,24 +2,24 @@ package dk.via.Model;
 
 public abstract class BaseModel {
 
-    int id;
+    int Id;
 
     public BaseModel(int id) {
-        this.id = id;
+        this.Id = id;
     }
 
     @Override
     public String toString() {
         return "BaseModel{" +
-                "id=" + id +
+                "id=" + Id +
                 '}';
     }
 
     public int getId() {
-        return id;
+        return Id;
     }
 
     public void setId(int id) {
-        this.id = id;
+        this.Id = id;
     }
 }

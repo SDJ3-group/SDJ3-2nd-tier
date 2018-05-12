@@ -2,45 +2,36 @@ package dk.via.Model;
 
 import java.util.ArrayList;
 
-public abstract class Package extends BaseModel {
-    private int id;
-    private ArrayList<Part> parts;
-    private Boolean repacking;
+public class Package extends BaseModel {
+    private ArrayList<Part> Parts;
+    private Boolean Repacking;
 
-    public Package(int id, ArrayList<Part> parts) {
+    public Package(int id, ArrayList<Part> parts, boolean repacking) {
         super(id);
-        this.parts = parts;
+        this.Parts = parts;
+        this.Repacking = repacking;
     }
 
     public ArrayList<Part> getParts() {
-        return parts;
+        return Parts;
     }
 
     public void setParts(ArrayList<Part> parts) {
-        this.parts = parts;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
+        this.Parts = parts;
     }
 
     public Boolean getRepacking() {
-        return repacking;
+        return Repacking;
     }
 
     public void setRepacking(Boolean repacking) {
-        this.repacking = repacking;
+        this.Repacking = repacking;
     }
 
     @Override
     public String toString() {
         return "Package{" +
-                "id=" + id +
-                ", parts=" + parts +
+                ", Parts=" + Parts +
                 '}';
     }
 }

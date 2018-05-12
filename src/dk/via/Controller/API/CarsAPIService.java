@@ -37,7 +37,7 @@ public class CarsAPIService extends APIService {
             cars = gson.fromJson(jsonData, Car[].class);
 
             for (Car car : cars) {
-                System.out.println(car.getVIN());
+                System.out.println(car.toString());
             }
 
         } catch (IOException e) {
@@ -48,10 +48,10 @@ public class CarsAPIService extends APIService {
     }
 
     // GET api/Cars/{id}
-    public Car getCar(int id) {
+    public Car getCar(String VIN) {
         Car car = null;
         try {
-            String url = SmallModels.BASE_URL + "Cars/" + id;
+            String url = SmallModels.BASE_URL + "Cars/" + VIN;
             request = new Request.Builder().url(url).build();
             Response responses = null;
 
@@ -62,10 +62,11 @@ public class CarsAPIService extends APIService {
             }
 
             String jsonData = responses.body().string();
+            System.out.println("JSON reply:" + jsonData);
             Gson gson = new Gson();
             gson.toJson(jsonData);
-            car = gson.fromJson(jsonData, Car[].class)[0];
-            car.toString();
+            car = gson.fromJson(jsonData, Car.class);
+            System.out.println(car.toString());
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -76,7 +77,6 @@ public class CarsAPIService extends APIService {
 
     // PUT api/Cars/{id}
     public void updateCar(Car car) {
-        //TODO treba pozriet to ID ci je to VIN cislo alebo id
         String url = SmallModels.BASE_URL + "Cars/" + car.getVIN();
         try {
             RequestBody formBody = new FormBody.Builder()
@@ -124,6 +124,17 @@ public class CarsAPIService extends APIService {
 
     // DELETE api/Cars/{id}
     public void deleteCar(Car car) {
-        super.deleteObject("Cars", car);
+        String url = SmallModels.BASE_URL + "Cars/" + car.getVIN();
+        try {
+            request = new Request.Builder()
+                    .url(url)
+                    .delete()
+                    .build();
+            Response response = client.newCall(request).execute();
+            System.out.println(response.body().string());
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -18,13 +18,13 @@ public abstract class APIService {
     }
 
     void deleteObject(String type, BaseModel object) {
-        String url = SmallModels.BASE_URL + "type" + object.getId();
-
+        String url = SmallModels.BASE_URL + type + object.getId();
         try {
             request = new Request.Builder()
                     .url(url)
                     .delete()
                     .build();
+
             Response response = client.newCall(request).execute();
             System.out.println(response.body().string());
 

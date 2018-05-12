@@ -4,16 +4,16 @@ import java.util.ArrayList;
 
 public class CategoryPackage extends Package {
 
+
     private Category category;
+
+    public CategoryPackage(int id, ArrayList<Part> parts, boolean repacking) {
+        super(id, parts, repacking);
+    }
 
     @Override
     public ArrayList<Part> getParts() {
         return super.getParts();
-    }
-
-    public CategoryPackage(int id, ArrayList<Part> parts, Category category) {
-        super(id, parts);
-        this.category = category;
     }
 
     public Category getCategory() {

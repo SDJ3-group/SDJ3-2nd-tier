@@ -7,14 +7,14 @@ import java.rmi.RemoteException;
 
 public interface CarsRMIInterface extends Remote {
 
-    public Car[] getAllCars() throws RemoteException;
+    Car[] getAllCars() throws RemoteException;
 
-    public Car getCar(int id) throws RemoteException;
+    Car getCar(String VIN) throws RemoteException;
 
-    public void updateCar(Car car) throws RemoteException;
+    void updateCar(Car car) throws RemoteException;
 
-    public void addCar(Car car) throws RemoteException;
+    void addCar(Car car) throws RemoteException;
 
-    public void deleteCar(Car car) throws RemoteException;
+    void deleteCar(Car car) throws RemoteException;
 
 }
