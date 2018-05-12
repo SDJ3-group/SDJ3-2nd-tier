@@ -11,6 +11,8 @@ import dk.via.Controller.RMI.PartsRMIService;
 import dk.via.Controller.RMIInterfaces.RMIInterface;
 import dk.via.Model.Car;
 import dk.via.Model.Package;
+import dk.via.Model.Pallet;
+import dk.via.Model.Part;
 
 import java.rmi.Naming;
 import java.rmi.RemoteException;
@@ -102,6 +104,56 @@ public class RMIServer extends UnicastRemoteObject implements RMIInterface {
 
     @Override
     public void deletePackage(Package pack) {
+
+    }
+
+    @Override
+    public Pallet[] getAllPallets() throws RemoteException {
+        return new Pallet[0];
+    }
+
+    @Override
+    public Pallet getPallet(int id) throws RemoteException {
+        return null;
+    }
+
+    @Override
+    public void updatePallet(Pallet pallet) throws RemoteException {
+
+    }
+
+    @Override
+    public void addPallet(Pallet pallet) throws RemoteException {
+
+    }
+
+    @Override
+    public void deletePallet(Pallet pallet) throws RemoteException {
+
+    }
+
+    @Override
+    public Part[] getAllParts() throws RemoteException {
+        return new Part[0];
+    }
+
+    @Override
+    public Part getPart(int id) throws RemoteException {
+        return null;
+    }
+
+    @Override
+    public void updatePart(Part part) throws RemoteException {
+
+    }
+
+    @Override
+    public void addPart(Part part) throws RemoteException {
+
+    }
+
+    @Override
+    public void deletePart(Part part) throws RemoteException {
 
     }
 }

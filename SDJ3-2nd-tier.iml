@@ -10,7 +10,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$USER_HOME$/Downloads/gson-2.8.4.jar!/" />
+          <root url="jar://$MODULE_DIR$/gson-2.8.4.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -19,12 +19,20 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$USER_HOME$/Downloads/json-20180130.jar!/" />
+          <root url="jar://$MODULE_DIR$/okio-1.14.0.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="library" name="gson-2.8.4" level="project" />
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/okhttp-3.10.0.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
   </component>
 </module>
