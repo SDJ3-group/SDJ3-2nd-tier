@@ -14,14 +14,16 @@ import dk.via.Model.Package;
 import dk.via.Model.Pallet;
 import dk.via.Model.Part;
 
-import java.rmi.Naming;
 import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 
 public class RMIServer extends UnicastRemoteObject implements RMIInterface {
 
     private static final long serialVersionUID = 1L;
-    private static String URL = "http://localhost:50387/api/";
+
+    private static String URL = "//localhost/RMIServer";
     public CarsRMIService carsRMI;
     public PackagesRMIService packagesRMI;
     public PalletsRMIService palletsRMI;
@@ -47,14 +49,15 @@ public class RMIServer extends UnicastRemoteObject implements RMIInterface {
     }
 
 
-    public void StartRMI() {
+    public void StartRMI(int serverPort) {
         try {
-            Naming.rebind(URL, new RMIServer());
-            System.out.println("System ready");
+            Registry reg = LocateRegistry.createRegistry(serverPort);
+            reg.bind("RmiService", new RMIServer());
+            System.out.println("Server started" + reg.toString());
         } catch (Exception e) {
+            System.out.println("We were unable to start server");
             e.printStackTrace();
         }
-
     }
 
     @Override
