@@ -23,7 +23,7 @@ public class FirstStationController extends Controller {
         Car incomingCar = new Car(licensePlate, model, weight);
         //modelManager.registerNewCar(incomingCar);
         try {
-            RMIClient.getInstance().getService().addCar(null);
+            RMIClient.getInstance().getRmiInterface().addCar(null);
             View.allert("The car " + incomingCar.toString() + " has been added");
         } catch (RemoteException e) {
             e.printStackTrace();
@@ -32,7 +32,7 @@ public class FirstStationController extends Controller {
 
     public String getAllCars() {
         try {
-            return RMIClient.getInstance().getService().getAllCars().toString();//modelManager.getAllCars();
+            return RMIClient.getInstance().getRmiInterface().getAllCars().toString();//modelManager.getAllCars();
         } catch (RemoteException e) {
             e.printStackTrace();
             return null;

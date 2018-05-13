@@ -32,9 +32,7 @@ public class RMIClient extends UnicastRemoteObject {
 
     public void startClient(String ipAddress, int port) {
         try {
-            //System.setSecurityManager(new RMISecurityManager());
-            rmiInterface = (RMIInterface) Naming.lookup("rmi://192.168.87.110:1099/RMIInterface");
-            //rmiInterface.getAllCars();
+            rmiInterface = (RMIInterface) Naming.lookup("rmi://" + ipAddress + ":" + port + "/RMIInterface");
             System.out.println("should be connected");
         } catch (NotBoundException e) {
             e.printStackTrace();
@@ -43,10 +41,9 @@ public class RMIClient extends UnicastRemoteObject {
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
-
     }
 
-    public RMIInterface getService() {
-        return null;
+    public RMIInterface getRmiInterface() {
+        return rmiInterface;
     }
 }

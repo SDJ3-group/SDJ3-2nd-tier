@@ -23,9 +23,9 @@ public class SecondStationController extends Controller {
         //try{
         Car carToBeDismantled = /*ModelManager.getInstance().getCar(vinNo);*/ null;
         try {
-            carToBeDismantled = RMIClient.getInstance().getService().getCar(vinNo);
+            carToBeDismantled = RMIClient.getInstance().getRmiInterface().getCar(vinNo);
             part.setCar(carToBeDismantled);
-            RMIClient.getInstance().getService().updatePart(part);
+            RMIClient.getInstance().getRmiInterface().updatePart(part);
             View.allert("the part " + part.toString() + " has been taken from the car " + carToBeDismantled);
         } catch (RemoteException e) {
             View.allert("there is no such a car in the warehouse");
