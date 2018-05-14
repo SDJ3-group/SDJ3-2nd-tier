@@ -1,7 +1,6 @@
 package dk.via.Tier2.Controller.API;
 
 import com.google.gson.Gson;
-import dk.via.Tier2.Model.Car;
 import dk.via.Tier2.Model.Pallet;
 import dk.via.Tier2.Model.SmallModels;
 import okhttp3.FormBody;
@@ -77,9 +76,9 @@ public class PalletsAPIService extends APIService {
     }
 
     // PUT api/Pallets/{id}
-    public void updateCar(Car car) {
+    public void updatePallet(Pallet pallet) {
         //TODO collection type
-        String url = SmallModels.BASE_URL + "Pallets/" + car.getVIN();
+        String url = SmallModels.BASE_URL + "Pallets/" + pallet.getId();
         try {
             RequestBody formBody = new FormBody.Builder()
                     .build();
