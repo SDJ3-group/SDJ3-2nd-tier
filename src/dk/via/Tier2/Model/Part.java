@@ -1,6 +1,8 @@
 package dk.via.Tier2.Model;
 
-public class Part extends BaseModel {
+import java.io.Serializable;
+
+public class Part extends BaseModel implements Serializable {
 
     private String Name;
     private double Weight;

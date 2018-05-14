@@ -1,8 +1,9 @@
 package dk.via.Tier2.Model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Pallet extends BaseModel {
+public class Pallet extends BaseModel implements Serializable {
 
     private ArrayList<Part> Parts;
     private double MaximumCapacity;

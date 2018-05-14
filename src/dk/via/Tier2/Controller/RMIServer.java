@@ -24,15 +24,14 @@ public class RMIServer extends UnicastRemoteObject implements RMIInterface {
 
     private static final long serialVersionUID = 1L;
 
-    private static String URL = "//localhost/RMIServer";
     public CarsRMIService carsRMI;
     public PackagesRMIService packagesRMI;
     public PalletsRMIService palletsRMI;
     public PartsRMIService partsRMI;
-    CarsAPIService carsAPI;
-    PackagesAPIService packagesAPI;
-    PalletsAPIService palletsAPI;
-    PartsAPIService partsAPI;
+    private CarsAPIService carsAPI;
+    private PackagesAPIService packagesAPI;
+    private PalletsAPIService palletsAPI;
+    private PartsAPIService partsAPI;
 
 
     public RMIServer() throws RemoteException {
@@ -54,7 +53,7 @@ public class RMIServer extends UnicastRemoteObject implements RMIInterface {
         try {
             System.setProperty("java.rmi.server.hostname", InetAddress.getLocalHost().getHostAddress());
             System.out.println("System: " + System.getProperty("java.rmi.server.hostname"));
-            Registry reg = LocateRegistry.createRegistry(1099);
+            Registry reg = LocateRegistry.createRegistry(serverPort);
             reg.bind("RMIInterface", new RMIServer());
 
             System.out.println("Server started" + reg.toString());
@@ -66,7 +65,8 @@ public class RMIServer extends UnicastRemoteObject implements RMIInterface {
 
     @Override
     public Car[] getAllCars() {
-        return new Car[0];
+        System.out.println("zavolala sa funkcia na servery");
+        return carsAPI.getAllCars();
     }
 
     @Override
@@ -100,7 +100,7 @@ public class RMIServer extends UnicastRemoteObject implements RMIInterface {
     }
 
     @Override
-    public void updatePackage(Package pack) throws RemoteException {
+    public void updatePackage(Package pack) {
     }
 
     @Override
@@ -114,52 +114,52 @@ public class RMIServer extends UnicastRemoteObject implements RMIInterface {
     }
 
     @Override
-    public Pallet[] getAllPallets() throws RemoteException {
+    public Pallet[] getAllPallets() {
         return new Pallet[0];
     }
 
     @Override
-    public Pallet getPallet(int id) throws RemoteException {
+    public Pallet getPallet(int id) {
         return null;
     }
 
     @Override
-    public void updatePallet(Pallet pallet) throws RemoteException {
+    public void updatePallet(Pallet pallet) {
 
     }
 
     @Override
-    public void addPallet(Pallet pallet) throws RemoteException {
+    public void addPallet(Pallet pallet) {
 
     }
 
     @Override
-    public void deletePallet(Pallet pallet) throws RemoteException {
+    public void deletePallet(Pallet pallet) {
 
     }
 
     @Override
-    public Part[] getAllParts() throws RemoteException {
+    public Part[] getAllParts() {
         return new Part[0];
     }
 
     @Override
-    public Part getPart(int id) throws RemoteException {
+    public Part getPart(int id) {
         return null;
     }
 
     @Override
-    public void updatePart(Part part) throws RemoteException {
+    public void updatePart(Part part) {
 
     }
 
     @Override
-    public void addPart(Part part) throws RemoteException {
+    public void addPart(Part part) {
 
     }
 
     @Override
-    public void deletePart(Part part) throws RemoteException {
+    public void deletePart(Part part) {
 
     }
 }

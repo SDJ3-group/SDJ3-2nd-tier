@@ -19,6 +19,7 @@ public class CarsRMIService extends UnicastRemoteObject implements CarsRMIInterf
 
     @Override
     public Car[] getAllCars() {
+        System.out.println("Mali by sa stiahnut vsetky auta ");
         return carsAPI.getAllCars();
     }
 

@@ -2,6 +2,7 @@ package dk.via.Tier1.Controller.RMI;
 
 
 import dk.via.Tier2.Controller.RMIInterfaces.RMIInterface;
+import dk.via.Tier2.Model.Car;
 
 import java.net.MalformedURLException;
 import java.rmi.Naming;
@@ -13,37 +14,33 @@ public class RMIClient extends UnicastRemoteObject {
 
     private static final long serialVersionUID = 1L;
 
-    private static RMIClient instance = null;
-    private static RMIInterface rmiInterface;
+    private RMIInterface rmiInterface;
 
-    private RMIClient() throws RemoteException {
+    public RMIClient() throws RemoteException {
+        super();
+
     }
 
-    public static RMIClient getInstance() {
-        if (instance == null) {
-            try {
-                instance = new RMIClient();
-            } catch (RemoteException e) {
-                e.printStackTrace();
-            }
-        }
-        return instance;
-    }
+
 
     public void startClient(String ipAddress, int port) {
         try {
             rmiInterface = (RMIInterface) Naming.lookup("rmi://" + ipAddress + ":" + port + "/RMIInterface");
             System.out.println("should be connected");
-        } catch (NotBoundException e) {
-            e.printStackTrace();
-        } catch (RemoteException e) {
-            e.printStackTrace();
-        } catch (MalformedURLException e) {
+        } catch (NotBoundException | RemoteException | MalformedURLException e) {
             e.printStackTrace();
         }
     }
 
-    public RMIInterface getRmiInterface() {
-        return rmiInterface;
+
+    public Car[] getAllCars() {
+        System.out.println("Zavolala sa funkcia");
+        try {
+            return rmiInterface.getAllCars();
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
+
 }

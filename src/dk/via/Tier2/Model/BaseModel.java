@@ -1,10 +1,12 @@
 package dk.via.Tier2.Model;
 
-public abstract class BaseModel {
+import java.io.Serializable;
 
-    int Id;
+public abstract class BaseModel implements Serializable {
 
-    public BaseModel(int id) {
+    private int Id;
+
+    BaseModel(int id) {
         this.Id = id;
     }
 

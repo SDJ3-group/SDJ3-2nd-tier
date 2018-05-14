@@ -8,11 +8,11 @@ import java.util.Scanner;
 /**
  * Created by Libcoo on 11.05.2018.
  */
-public class View1 extends View {
+class View1 extends View {
     private Scanner keyboard = new Scanner(System.in);
     private FirstStationController controller = new FirstStationController();
 
-    public View1() {
+    View1() {
 
         while (true) {
             System.out.println("if you want to stop type in exit else press enter");
@@ -34,7 +34,7 @@ public class View1 extends View {
         String model = keyboard.nextLine();
         System.out.println("write in the weight");
         float weight = (float) keyboard.nextInt();
-        controller.registerCar(licensePlate, model, weight);
+        //    controller.registerCar(licensePlate, model, weight);
         //System.out.println(Controller.getAllCars());
     }
 }

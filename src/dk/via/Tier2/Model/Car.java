@@ -1,8 +1,9 @@
 package dk.via.Tier2.Model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Car extends BaseModel {
+public class Car extends BaseModel implements Serializable {
 
     private String VIN;
     private String Model;

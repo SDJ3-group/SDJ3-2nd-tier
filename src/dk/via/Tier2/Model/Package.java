@@ -1,8 +1,9 @@
 package dk.via.Tier2.Model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Package extends BaseModel {
+public class Package extends BaseModel implements Serializable {
     private ArrayList<Part> Parts;
     private Boolean Repacking;
 
