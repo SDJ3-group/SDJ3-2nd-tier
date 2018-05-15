@@ -2,7 +2,6 @@ package dk.via.Tier1.Controller;
 
 
 import dk.via.Tier1.Controller.RMI.RMIClient;
-import dk.via.Tier1.Model.ModelManager;
 import dk.via.Tier1.View.View;
 import dk.via.Tier2.Model.Car;
 
@@ -18,10 +17,14 @@ public class FirstStationController extends Controller {
     }
 
     public void registerCar(String vinNo, String model, float weight) {
-        Car incomingCar = new Car(-1,vinNo, model, weight);
+        System.out.println("pred vytovrenim auta");
+        Car incomingCar = new Car(-1, vinNo, model, weight);
         //modelManager.registerNewCar(incomingCar);
+        System.out.println("po vytovrenie auta" + incomingCar.toString());
         try {
+            System.out.println("pred rmi");
             RMIClient.getInstance().getRmiService().addCar(incomingCar);
+            System.out.println("po rmi");
             View.allert("The car " + incomingCar.toString() + " has been added");
         } catch (RemoteException e) {
             e.printStackTrace();

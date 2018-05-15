@@ -22,12 +22,10 @@ public class RMIClient extends UnicastRemoteObject {
 
     }
 
-
-
     public void startClient(String ipAddress, int port) {
         try {
             rmiInterface = (RMIInterface) Naming.lookup("rmi://" + ipAddress + ":" + port + "/RMIInterface");
-            System.out.println("should be connected");
+            System.out.println("should be connected" + rmiInterface.toString());
         } catch (NotBoundException | RemoteException | MalformedURLException e) {
             e.printStackTrace();
             System.out.println("connection went wrong");

@@ -100,7 +100,8 @@ public class PartsAPIService extends APIService {
     // POST api/Parts
     public void addPart(Part part) {
         //TODO ostatne
-        String url = SmallModels.BASE_URL + "Cars/" + part.getCar().getVIN() + "/Parts";
+        System.out.println("Zavolala sa funkcia app part s paramtetrami: " + part.toString());
+        String url = SmallModels.BASE_URL + "Cars/" + part.getCarId() + "/Parts";
         try {
             RequestBody formBody = new FormBody.Builder()
                     .add("Name", part.getName())

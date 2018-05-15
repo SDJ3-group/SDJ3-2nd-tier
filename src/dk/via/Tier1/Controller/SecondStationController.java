@@ -2,7 +2,6 @@ package dk.via.Tier1.Controller;
 
 
 import dk.via.Tier1.Controller.RMI.RMIClient;
-import dk.via.Tier1.Model.ModelManager;
 import dk.via.Tier1.View.View;
 import dk.via.Tier2.Model.Car;
 import dk.via.Tier2.Model.Part;
@@ -21,7 +20,7 @@ public class SecondStationController extends Controller {
         try {
             Car carToBeDismantled = RMIClient.getInstance().getRmiService().getCar(vinNo);
             try {
-                part.setCar(carToBeDismantled);
+                //  part.setCar(carToBeDismantled);
                 RMIClient.getInstance().getRmiService().addPart(part);
                 View.allert("the part " + part.toString() + " has been taken from the car " + carToBeDismantled);
             } catch (RemoteException e) {

@@ -66,6 +66,7 @@ public class RMIServer extends UnicastRemoteObject implements RMIInterface {
 
     @Override
     public void addCar(Car car) {
+        System.out.println("Zavolalo sa vytvorenie auta");
         carsAPI.addCar(car);
     }
 
@@ -135,52 +136,52 @@ public class RMIServer extends UnicastRemoteObject implements RMIInterface {
     }
 
     @Override
-    public Part[] getAllParts() throws RemoteException {
+    public Part[] getAllParts() {
         return partsAPI.getAllParts();
     }
 
     @Override
-    public Part getPart(int id) throws RemoteException {
+    public Part getPart(int id) {
         return partsAPI.getPart(id);
     }
 
     @Override
-    public void updatePart(String VIN, Part part) throws RemoteException {
+    public void updatePart(String VIN, Part part) {
         partsAPI.updatePart(VIN, part);
     }
 
     @Override
-    public void addPart(Part part) throws RemoteException {
+    public void addPart(Part part) {
         partsAPI.addPart(part);
     }
 
     @Override
-    public void deletePart(Part part) throws RemoteException {
+    public void deletePart(Part part) {
         partsAPI.deletePart(part);
     }
 
     @Override
-    public void assignPartsToPallet(Part[] parts, int palletId) throws RemoteException {
+    public void assignPartsToPallet(Part[] parts, int palletId) {
         partsAPI.putPartsOnPallet(parts, palletId);
     }
 
     @Override
-    public Part[] getPartsForPallete(int palletId) throws RemoteException {
+    public Part[] getPartsForPallete(int palletId) {
         return partsAPI.getPartsForPallet(palletId);
     }
 
     @Override
-    public void putPartsInPackage(Part[] parts, int packageId) throws RemoteException {
+    public void putPartsInPackage(Part[] parts, int packageId) {
         partsAPI.assignPartsToPackage(parts, packageId);
     }
 
     @Override
-    public Part[] getPartsForCar(String VIN) throws RemoteException {
+    public Part[] getPartsForCar(String VIN) {
         return partsAPI.getPartsForCar(VIN);
     }
 
     @Override
-    public Part[] getPartsForPackage(int packageId) throws RemoteException {
+    public Part[] getPartsForPackage(int packageId) {
         return partsAPI.getPartsForPackage(packageId);
     }
 }
