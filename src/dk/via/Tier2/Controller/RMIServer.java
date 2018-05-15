@@ -36,7 +36,6 @@ public class RMIServer extends UnicastRemoteObject implements RMIInterface {
 
     }
 
-
     public void StartRMI(int serverPort) {
         try {
             System.setProperty("java.rmi.server.hostname", InetAddress.getLocalHost().getHostAddress());
@@ -93,6 +92,16 @@ public class RMIServer extends UnicastRemoteObject implements RMIInterface {
     @Override
     public void addPackage(Package pack) {
         packagesAPI.addPackage(pack);
+    }
+
+    @Override
+    public void makeModelPackage(int numberOfParts, String model) {
+        packagesAPI.makeModelPackage(numberOfParts, model);
+    }
+
+    @Override
+    public void makeSystemPackage(int numberOfParts, String partType) {
+        packagesAPI.makeSystemPackage(numberOfParts, partType);
     }
 
     @Override

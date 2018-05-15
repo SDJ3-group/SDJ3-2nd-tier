@@ -16,4 +16,8 @@ public interface PackagesRMIInterface {
     public void addPackage(Package pack) throws RemoteException;
 
     public void deletePackage(Package pack) throws RemoteException;
+
+    public void makeModelPackage(int numberOfParts, String model) throws RemoteException;
+
+    public void makeSystemPackage(int numberOfParts, String partType) throws RemoteException;
 }

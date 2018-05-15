@@ -117,6 +117,17 @@ public class PackagesAPIService extends APIService {
 
     }
 
+
+    // make model Package mala by brat number of parts and string of model
+    public void makeModelPackage(int numberOfParts, String model) {
+
+    }
+
+    // make system package mala by brat number of parts and mode
+    public void makeSystemPackage(int numberOfParts, String partType) {
+
+    }
+
     // DELETE api/Packages/{id}
     public void deletePackage(Package pack) {
         super.deleteObject("Packages", pack);
