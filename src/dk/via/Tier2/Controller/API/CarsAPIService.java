@@ -12,6 +12,35 @@ import java.io.IOException;
 
 public class CarsAPIService extends APIService {
 
+    public void testAPI(String VIN) {
+        try {
+            String url = SmallModels.BASE_URL + "Cars/" + VIN + "/Parts";
+
+            RequestBody formBody = new FormBody.Builder()
+                    .add("Id", String.valueOf(123))
+                    .add("Name", "Spojka")
+                    .add("Weight", String.valueOf(456))
+                    .build();
+
+            request = new Request.Builder()
+                    .url(url)
+                    .post(formBody)
+                    .build();
+
+            Response response = null;
+
+            try {
+                response = client.newCall(request).execute();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            System.out.println(response.body().string());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     // GET  api/Cars
     public Car[] getAllCars() {
         Car[] cars = null;

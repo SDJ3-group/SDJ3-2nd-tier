@@ -1,9 +1,7 @@
 package dk.via.Tier2;
 
 
-import dk.via.Tier2.Controller.RMIServer;
-
-import java.rmi.RemoteException;
+import dk.via.Tier2.Controller.API.CarsAPIService;
 
 public class Tier2Main {
 
@@ -11,13 +9,16 @@ public class Tier2Main {
 
     public static void main(String[] args) {
 
-        //      System.setProperty("java.rmi.server.hostname", "127.0.0.1/RmiService");
+        CarsAPIService carsAPIService = new CarsAPIService();
+        carsAPIService.testAPI("VIN01");
 
-        try {
-            RMIServer rmiServer = new RMIServer();
-            rmiServer.StartRMI(1099);
-        } catch (RemoteException e) {
-            e.printStackTrace();
-        }
+        //      System.setProperty("java.rmi.server.hostname", "127.0.0.1/RmiService");
+//
+//        try {
+//            RMIServer rmiServer = new RMIServer();
+//            rmiServer.StartRMI(1099);
+//        } catch (RemoteException e) {
+//            e.printStackTrace();
+//        }
     }
 }

@@ -98,9 +98,9 @@ public class PartsAPIService extends APIService {
     }
 
     // POST api/Parts                Id:Integer, Name: String, Weight: decimal number, Car: car, Pallet: Pallet, Package: Package
-    public void addPart(Part part) {
-        //TODO ostatne fieldy
-        String url = SmallModels.BASE_URL + "Parts";
+    public void addPartToCar(String carVIN, Part part) {
+        //TODO ostatne
+        String url = SmallModels.BASE_URL + "Cars/" + carVIN + "/Parts";
         try {
             RequestBody formBody = new FormBody.Builder()
                     .add("Name", part.getName())
@@ -118,6 +118,18 @@ public class PartsAPIService extends APIService {
             e.printStackTrace();
         }
     }
+
+    // Get Parts for Car
+
+    // Get Parts for Package
+
+    // PUT Assign Part to Car
+
+    // PUT Assign Part to Package
+
+    // GET Parts for Pallet
+
+    // PUT Part on Pallet
 
     // DELETE api/Parts/{id}
     public void deletePart(Part part) {
