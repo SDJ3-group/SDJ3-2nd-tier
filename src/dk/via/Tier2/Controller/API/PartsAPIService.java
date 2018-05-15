@@ -75,9 +75,9 @@ public class PartsAPIService extends APIService {
     }
 
     // PUT api/Parts/{id}
-    public void updatePart(Part part) {
+    public void updatePart(String VIN, Part part) {
         //TODO dalsie parametre
-        String url = SmallModels.BASE_URL + "Parts/" + part.getId();
+        String url = SmallModels.BASE_URL + "Cars/" + VIN + "Parts/" + part.getId();
         try {
             RequestBody formBody = new FormBody.Builder()
                     .add("Name", part.getName())
@@ -97,7 +97,7 @@ public class PartsAPIService extends APIService {
         }
     }
 
-    // POST api/Parts                Id:Integer, Name: String, Weight: decimal number, Car: car, Pallet: Pallet, Package: Package
+    // POST api/Parts
     public void addPartToCar(String carVIN, Part part) {
         //TODO ostatne
         String url = SmallModels.BASE_URL + "Cars/" + carVIN + "/Parts";
@@ -119,17 +119,137 @@ public class PartsAPIService extends APIService {
         }
     }
 
-    // Get Parts for Car
+    // Get Parts for Car api/Cars/{id}/Parts
+    public Part[] getPartsForCar(String VIN) {
+        Part[] parts = null;
+
+        try {
+            String url = SmallModels.BASE_URL + "Cars/" + VIN + "/Parts";
+
+            request = new Request.Builder().url(url).build();
+
+            Response responses = null;
+
+            try {
+                responses = client.newCall(request).execute();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            String jsonData = responses.body().string();
+
+            Gson gson = new Gson();
+            gson.toJson(jsonData);
+
+            parts = gson.fromJson(jsonData, Part[].class);
+
+            for (Part part : parts) {
+                System.out.println(part.getName());
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return parts;
+    }
 
     // Get Parts for Package
+    public Part[] getPartsForPackage(int packageId) {
+        Part[] parts = null;
 
-    // PUT Assign Part to Car
+        try {
+            String url = SmallModels.BASE_URL + "Packages/" + packageId + "/Parts";
 
-    // PUT Assign Part to Package
+            request = new Request.Builder().url(url).build();
 
-    // GET Parts for Pallet
+            Response responses = null;
 
-    // PUT Part on Pallet
+            try {
+                responses = client.newCall(request).execute();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            String jsonData = responses.body().string();
+
+            Gson gson = new Gson();
+            gson.toJson(jsonData);
+
+            parts = gson.fromJson(jsonData, Part[].class);
+
+            for (Part part : parts) {
+                System.out.println(part.getName());
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return parts;
+    }
+
+    // PUT Assign Part to Car  api/Cars/{id}/Parts/{partId}
+    public void assignPartToCar(String VIN, Part part) {
+        //TODO
+        String url = SmallModels.BASE_URL + "Cars/" + VIN + "/Parts/" + part.getId();
+
+        request = new Request.Builder().url(url).build();
+
+        Response response = null;
+
+        try {
+            response = client.newCall(request).execute();
+            System.out.println(response.body().string());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    // PUT Assign Part to Package api/Packages/{id}/Parts
+    public void assignPartsToPackage(Part[] parts, int packageId) {
+        //TODO spravit
+    }
+
+    // GET Parts for Pallet  api/Pallete/{id}/Parts
+    public Part[] getPartsForPallet(int palletId) {
+        Part[] parts = null;
+
+        try {
+            String url = SmallModels.BASE_URL + "Pallete/" + palletId + "/Parts";
+
+            request = new Request.Builder().url(url).build();
+
+            Response responses = null;
+
+            try {
+                responses = client.newCall(request).execute();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            String jsonData = responses.body().string();
+
+            Gson gson = new Gson();
+            gson.toJson(jsonData);
+
+            parts = gson.fromJson(jsonData, Part[].class);
+
+            for (Part part : parts) {
+                System.out.println(part.getName());
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return parts;
+    }
+
+    // PUT Part on Pallet api/Pallete/{id}/Parts
+    public void putPartsOnPallet(Part[] parts, int palletId) {
+
+    }
 
     // DELETE api/Parts/{id}
     public void deletePart(Part part) {

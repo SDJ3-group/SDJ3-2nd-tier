@@ -10,10 +10,20 @@ public interface PartsRMIInterface {
 
     Part getPart(int id) throws RemoteException;
 
-    void updatePart(Part part) throws RemoteException;
+    void updatePart(String VIN, Part part) throws RemoteException;
 
-    void addPart(Part part) throws RemoteException;
+    void addPart(String VIN, Part part) throws RemoteException;
 
     void deletePart(Part part) throws RemoteException;
+
+    void assignPartsToPallet(Part[] parts, int palletId) throws RemoteException;
+
+    Part[] getPartsForPallete(int palletId) throws RemoteException;
+
+    void putPartsInPackage(Part[] parts, int PackageId) throws RemoteException;
+
+    Part[] getPartsForCar(String VIN) throws RemoteException;
+
+    Part[] getPartsForPackage(int packageId) throws RemoteException;
 
 }

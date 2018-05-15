@@ -126,27 +126,52 @@ public class RMIServer extends UnicastRemoteObject implements RMIInterface {
     }
 
     @Override
-    public Part[] getAllParts() {
+    public Part[] getAllParts() throws RemoteException {
         return partsAPI.getAllParts();
     }
 
     @Override
-    public Part getPart(int id) {
+    public Part getPart(int id) throws RemoteException {
         return partsAPI.getPart(id);
     }
 
     @Override
-    public void updatePart(Part part) {
-        partsAPI.updatePart(part);
+    public void updatePart(String VIN, Part part) throws RemoteException {
+        partsAPI.updatePart(VIN, part);
     }
 
     @Override
-    public void addPart(Part part) {
-        partsAPI.addPart(part);
+    public void addPart(String VIN, Part part) throws RemoteException {
+        partsAPI.addPartToCar(VIN, part);
     }
 
     @Override
-    public void deletePart(Part part) {
+    public void deletePart(Part part) throws RemoteException {
         partsAPI.deletePart(part);
+    }
+
+    @Override
+    public void assignPartsToPallet(Part[] parts, int palletId) throws RemoteException {
+        partsAPI.putPartsOnPallet(parts, palletId);
+    }
+
+    @Override
+    public Part[] getPartsForPallete(int palletId) throws RemoteException {
+        return partsAPI.getPartsForPallet(palletId);
+    }
+
+    @Override
+    public void putPartsInPackage(Part[] parts, int packageId) throws RemoteException {
+        partsAPI.assignPartsToPackage(parts, packageId);
+    }
+
+    @Override
+    public Part[] getPartsForCar(String VIN) throws RemoteException {
+        return partsAPI.getPartsForCar(VIN);
+    }
+
+    @Override
+    public Part[] getPartsForPackage(int packageId) throws RemoteException {
+        return partsAPI.getPartsForPackage(packageId);
     }
 }
