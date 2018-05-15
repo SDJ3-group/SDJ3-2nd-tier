@@ -6,26 +6,30 @@ public class Part extends BaseModel implements Serializable {
 
     private String Name;
     private double Weight;
-    private Car Car;
-    private Pallet Pallet;
-    private Package Package;
+    private String CarId;
+    private int PalletId;
+    private int PreviousPalletId;
+    private int PackageId;
 
 
-    public Part(int id, String name, double weight, Car car, Pallet pallet, Package pack) {
+    public Part(int id, String name, double weight, String carId) {
         super(id);
         Name = name;
         Weight = weight;
-        Car = car;
-        Pallet = pallet;
-        Package = pack;
+        CarId = carId;
+        PalletId = 0;
+        PackageId = 0;
+        PreviousPalletId = 0;
     }
 
-    public Part(int id, String name, double weight, Car car) {
+    public Part(int id, String name, double weight, String carId, int palletId, int previousPalletId, int packageId) {
         super(id);
-        this.Name = name;
-        this.Weight = weight;
-        this.Car = car;
-
+        Name = name;
+        Weight = weight;
+        CarId = carId;
+        PalletId = palletId;
+        PreviousPalletId = previousPalletId;
+        PackageId = packageId;
     }
 
     public String getName() {
@@ -44,20 +48,36 @@ public class Part extends BaseModel implements Serializable {
         this.Weight = weight;
     }
 
-    public Car getCar() {
-        return Car;
+    public String getCarId() {
+        return CarId;
     }
 
-    public void setCar(Car car) {
-        this.Car = car;
+    public void setCarId(String carId) {
+        CarId = carId;
     }
 
-    public Pallet getPallet() {
-        return Pallet;
+    public int getPalletId() {
+        return PalletId;
     }
 
-    public void setPallet(Pallet pallet) {
-        this.Pallet = pallet;
+    public void setPalletId(int palletId) {
+        PalletId = palletId;
+    }
+
+    public int getPackageId() {
+        return PackageId;
+    }
+
+    public void setPackageId(int packageId) {
+        PackageId = packageId;
+    }
+
+    public int getPreviousPalletId() {
+        return PreviousPalletId;
+    }
+
+    public void setPreviousPalletId(int previousPalletId) {
+        PreviousPalletId = previousPalletId;
     }
 
     @Override
@@ -65,8 +85,10 @@ public class Part extends BaseModel implements Serializable {
         return "Part{" +
                 "Name='" + Name + '\'' +
                 ", Weight=" + Weight +
-                ", Car=" + Car +
-                ", Pallet=" + Pallet +
+                ", CarId='" + CarId + '\'' +
+                ", PalletId=" + PalletId +
+                ", PreviousPalletId=" + PreviousPalletId +
+                ", PackageId=" + PackageId +
                 '}';
     }
 }

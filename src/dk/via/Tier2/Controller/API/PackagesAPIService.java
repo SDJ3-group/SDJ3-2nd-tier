@@ -2,6 +2,7 @@ package dk.via.Tier2.Controller.API;
 
 import com.google.gson.Gson;
 import dk.via.Tier2.Model.Package;
+import dk.via.Tier2.Model.Part;
 import dk.via.Tier2.Model.SmallModels;
 import okhttp3.FormBody;
 import okhttp3.Request;
@@ -118,8 +119,27 @@ public class PackagesAPIService extends APIService {
     }
 
 
-    // make model Package mala by brat number of parts and string of model
+    // make model Package mala by brat number of parts and string of model a urobit package z volnych partov dan0ho typu
     public void makeModelPackage(int numberOfParts, String model) {
+        //     Part[] parts = getAllFreeParts();
+
+
+//        for (Part part: parts) {
+//            transferPartFromPalletToPackage(part, );
+//        }
+
+/*
+        ArrayList<Part> allLegitObjects = getAllLegitObjectsFromPalletes(whatType);
+        if (allLegitObjects != null) {
+            if (!(allLegitObjects.size() < noOfObjects)) {
+                for (int i = 0; i < noOfObjects; i++) {
+                    transferPartFromPaletToPackage(allLegitObjects.get(i), aPackage, allLegitObjects.get(i).getPallet());
+                }
+            } else throw new NoPermissionException("There are not enough parts in the warehouse to form this package");
+        }
+
+        */
+
 
     }
 
@@ -132,5 +152,31 @@ public class PackagesAPIService extends APIService {
     public void deletePackage(Package pack) {
         super.deleteObject("Packages", pack);
     }
+
+    private void transferPartFromPalletToPackage(Part part, Package pack) {
+        part.setPalletId(0);
+        part.setPalletId(pack.getId());
+
+
+        //TODO upload this to server
+    }
+
+//    private Part[] getAllFreeParts(boolean modelParts, String value) {
+//        List<Part> freeParts = new ArrayList<Part>();
+//        Part[] allParts = new PartsAPIService().getAllParts();
+//
+//        for (Part part : allParts) {
+//            if (part.getPackageId() == 0 || part.getPreviousPalletId() == 0) {
+//                if () {
+//                    if (part.getName())
+//                }
+//                freeParts.add(part);
+//            }
+//        }
+//
+//
+//        return (Part[]) freeParts.toArray();
+//
+//    }
 
 }
