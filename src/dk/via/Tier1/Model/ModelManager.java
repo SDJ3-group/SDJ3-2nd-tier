@@ -49,8 +49,7 @@ public class ModelManager {
     }
 
     public Car getCar(String licensePlate) {
-        System.out.println("som v getCar a prislo mi sem " + licensePlate);
-        System.out.println(cars.size());
+
         for (int i = 0; i < cars.size(); i++) {
 
             if (cars.get(i).getVinNO().equals(licensePlate)) {

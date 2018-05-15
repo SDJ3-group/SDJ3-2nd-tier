@@ -16,12 +16,9 @@ public class PartsAPIService extends APIService {
     // GET  api/Parts
     public Part[] getAllParts() {
         Part[] parts = null;
-
         try {
             String url = SmallModels.BASE_URL + "Parts";
-
             request = new Request.Builder().url(url).build();
-
             Response responses = null;
 
             try {
@@ -31,15 +28,9 @@ public class PartsAPIService extends APIService {
             }
 
             String jsonData = responses.body().string();
-
             Gson gson = new Gson();
             gson.toJson(jsonData);
-
             parts = gson.fromJson(jsonData, Part[].class);
-
-            for (Part part : parts) {
-                System.out.println(part.getName());
-            }
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -76,13 +67,18 @@ public class PartsAPIService extends APIService {
     }
 
     // PUT api/Parts/{id}
-    public void updatePart(String VIN, Part part) {
-        //TODO dalsie parametre
-        String url = SmallModels.BASE_URL + "Cars/" + VIN + "Parts/" + part.getId();
+    public void updatePart(Part part) {
+        String url = SmallModels.BASE_URL + "Cars/" + part.getCarId() + "/Parts/" + part.getId();
         try {
+
             RequestBody formBody = new FormBody.Builder()
+                    .add("Id", String.valueOf(part.getId()))
                     .add("Name", part.getName())
                     .add("Weight", String.valueOf(part.getWeight()))
+                    .add("CarId", part.getCarId())
+                    .add("PalletId", String.valueOf(part.getPalletId()))
+                    .add("PreviusPalletId", String.valueOf(part.getPreviousPalletId()))
+                    .add("PackageId", String.valueOf(part.getPackageId()))
                     .build();
 
             request = new Request.Builder()
@@ -91,6 +87,7 @@ public class PartsAPIService extends APIService {
                     .build();
 
             Response response = client.newCall(request).execute();
+            System.out.println("Add part code:" + response.code());
             System.out.println(response.body().string());
 
         } catch (IOException e) {
@@ -104,30 +101,14 @@ public class PartsAPIService extends APIService {
         System.out.println("Zavolala sa funkcia app part s paramtetrami: " + part.toString());
         String url = SmallModels.BASE_URL + "Cars/" + part.getCarId() + "/Parts";
         Pallet suitablePallet = new PalletsAPIService().getSuitablePalletForPart(part);
-        System.out.println("Suitable pallet: " + suitablePallet.toString());
-        //   part.setPalletId(new PalletsAPIService().getSuitablePalletForPart(part).getId());
 
         try {
-            System.out.println("suitable pallet id:" + suitablePallet.getId());
             RequestBody formBody = new FormBody.Builder()
                     .add("Name", part.getName())
                     .add("Weight", String.valueOf(part.getWeight()))
                     .add("PalletId", String.valueOf(suitablePallet.getId()))
                     .add("CarId", part.getCarId())
                     .build();
-/*
-            MediaType textPlainMT = MediaType.parse("text/plain; charset=utf-8");
-            String helloMsg = "Hello OkHttp";
-
-            Request request = new Request.Builder().url("https://httpbin.org/post")
-                    .post(RequestBody.create(textPlainMT, helloMsg)).build();
-
-            Response response = client.newCall(request).execute();
-
-            assertTrue(response.isSuccessful());
-            response.close();
-
-             */
 
             request = new Request.Builder()
                     .url(url)
@@ -135,8 +116,8 @@ public class PartsAPIService extends APIService {
                     .build();
 
             Response response = client.newCall(request).execute();
-            System.out.println("executlo sa " + request.body().toString());
-            System.out.println("Nieco: " + response.code());
+            System.out.println("executlo sa " + response.body().string());
+            System.out.println("HTTP code: " + response.code());
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -148,9 +129,7 @@ public class PartsAPIService extends APIService {
 
         try {
             String url = SmallModels.BASE_URL + "Cars/" + VIN + "/Parts";
-
             request = new Request.Builder().url(url).build();
-
             Response responses = null;
 
             try {
@@ -165,11 +144,6 @@ public class PartsAPIService extends APIService {
             gson.toJson(jsonData);
 
             parts = gson.fromJson(jsonData, Part[].class);
-
-            for (Part part : parts) {
-                System.out.println(part.getName());
-            }
-
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -183,9 +157,7 @@ public class PartsAPIService extends APIService {
 
         try {
             String url = SmallModels.BASE_URL + "Packages/" + packageId + "/Parts";
-
             request = new Request.Builder().url(url).build();
-
             Response responses = null;
 
             try {
@@ -195,15 +167,9 @@ public class PartsAPIService extends APIService {
             }
 
             String jsonData = responses.body().string();
-
             Gson gson = new Gson();
             gson.toJson(jsonData);
-
             parts = gson.fromJson(jsonData, Part[].class);
-
-            for (Part part : parts) {
-                System.out.println(part.getName());
-            }
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -215,11 +181,8 @@ public class PartsAPIService extends APIService {
     public void assignPartToCar(String VIN, Part part) {
         //TODO
         String url = SmallModels.BASE_URL + "Cars/" + VIN + "/Parts/" + part.getId();
-
         request = new Request.Builder().url(url).build();
-
         Response response = null;
-
         try {
             response = client.newCall(request).execute();
             System.out.println(response.body().string());
@@ -231,7 +194,7 @@ public class PartsAPIService extends APIService {
 
     // PUT Assign Part to Package api/Packages/{id}/Parts
     public void assignPartsToPackage(Part[] parts, int packageId) {
-        //TODO spravit
+        //TODO not implemented
     }
 
     // GET Parts for Pallet  api/Pallete/{id}/Parts
@@ -271,7 +234,7 @@ public class PartsAPIService extends APIService {
 
     // PUT Part on Pallet api/Pallete/{id}/Parts
     public void putPartsOnPallet(Part[] parts, int palletId) {
-
+        //TODO not implemented
     }
 
     // DELETE api/Parts/{id}

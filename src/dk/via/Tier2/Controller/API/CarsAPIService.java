@@ -12,35 +12,6 @@ import java.io.IOException;
 
 public class CarsAPIService extends APIService {
 
-    public void testAPI(String VIN) {
-        try {
-            String url = SmallModels.BASE_URL + "Cars/" + VIN + "/Parts";
-
-            RequestBody formBody = new FormBody.Builder()
-                    .add("Id", String.valueOf(123))
-                    .add("Name", "Spojka")
-                    .add("Weight", String.valueOf(456))
-                    .build();
-
-            request = new Request.Builder()
-                    .url(url)
-                    .post(formBody)
-                    .build();
-
-            Response response = null;
-
-            try {
-                response = client.newCall(request).execute();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-            System.out.println(response.body().string());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
     // GET  api/Cars
     public Car[] getAllCars() {
         Car[] cars = null;
@@ -59,15 +30,9 @@ public class CarsAPIService extends APIService {
             }
 
             String jsonData = responses.body().string();
-
             Gson gson = new Gson();
             gson.toJson(jsonData);
-
             cars = gson.fromJson(jsonData, Car[].class);
-
-            for (Car car : cars) {
-                System.out.println(car.toString());
-            }
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -91,11 +56,9 @@ public class CarsAPIService extends APIService {
             }
 
             String jsonData = responses.body().string();
-            System.out.println("JSON reply:" + jsonData);
             Gson gson = new Gson();
             gson.toJson(jsonData);
             car = gson.fromJson(jsonData, Car.class);
-            System.out.println(car.toString());
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -129,7 +92,6 @@ public class CarsAPIService extends APIService {
 
     // POST api/Cars                VIN:string, Model:string, Weight: decimal number, Parts:Collection of Part
     public void addCar(Car car) {
-        //TODO treba dorobit parts
         String url = SmallModels.BASE_URL + "Cars/";
         try {
             RequestBody formBody = new FormBody.Builder()

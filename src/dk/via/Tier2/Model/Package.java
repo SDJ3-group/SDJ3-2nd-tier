@@ -13,6 +13,12 @@ public class Package extends BaseModel implements Serializable {
         this.Repacking = repacking;
     }
 
+    public Package(int id, boolean repacking) {
+        super(id);
+        this.Repacking = repacking;
+        this.Parts = new ArrayList<>();
+    }
+
     public ArrayList<Part> getParts() {
         return Parts;
     }

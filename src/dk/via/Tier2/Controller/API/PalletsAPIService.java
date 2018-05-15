@@ -19,9 +19,7 @@ public class PalletsAPIService extends APIService {
 
         try {
             String url = SmallModels.BASE_URL + "Pallets";
-
             request = new Request.Builder().url(url).build();
-
             Response responses = null;
 
             try {
@@ -31,15 +29,9 @@ public class PalletsAPIService extends APIService {
             }
 
             String jsonData = responses.body().string();
-
             Gson gson = new Gson();
             gson.toJson(jsonData);
-
             pallets = gson.fromJson(jsonData, Pallet[].class);
-
-            for (Pallet pallet : pallets) {
-                System.out.println(pallet.getId());
-            }
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -130,36 +122,27 @@ public class PalletsAPIService extends APIService {
 
         for (Pallet pallet : allPallets) {
             Part[] parts = partsAPI.getPartsForPallet(pallet.getId());
-            System.out.println("Party: " + parts.length);
             try {
                 pallet.setParts(parts);
             } catch (NullPointerException e) {
-                System.out.println("Palleta je prazdna");
+                e.printStackTrace();
             }
-
         }
 
         for (Pallet pallet : allPallets) {
             if (pallet.getParts() == null) {
                 return pallet;
             }
-            if (pallet.getParts().get(0).getName() == part.getName()) {
+            if (pallet.getParts().get(0).getName().equals(part.getName())) {
                 if ((pallet.getMaximumCapacity() - pallet.currentCapacity()) >= part.getWeight()) {
                     return pallet;
-                } else
-                    System.out.println("Palle is not suitable");
+                }
             }
         }
 
-        Pallet newPallet = new Pallet(44, 1000);
+        Pallet newPallet = new Pallet(999, 1000);
         addPallet(newPallet);
-
-        System.out.println("Should create new pallet");
-
 
         return newPallet;
     }
-
-
-
 }

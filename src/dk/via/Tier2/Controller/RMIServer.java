@@ -43,16 +43,6 @@ public class RMIServer extends UnicastRemoteObject implements RMIInterface {
             Registry reg = LocateRegistry.createRegistry(serverPort);
             reg.bind("RMIInterface", new RMIServer());
             System.out.println("Server started" + reg.toString());
-
-
-            Pallet pallet = new Pallet(22, 1234);
-            palletsAPI.addPallet(pallet);
-
-            Part part = new Part(44, "Spojka", 234);
-            // System.out.println(palletsAPI.getSuitablePalletForPart(part));
-            partsAPI.addPart(part);
-
-
         } catch (Exception e) {
             System.out.println("We were unable to start server");
             e.printStackTrace();
@@ -76,7 +66,6 @@ public class RMIServer extends UnicastRemoteObject implements RMIInterface {
 
     @Override
     public void addCar(Car car) {
-        System.out.println("Zavolalo sa vytvorenie auta");
         carsAPI.addCar(car);
     }
 
@@ -157,7 +146,7 @@ public class RMIServer extends UnicastRemoteObject implements RMIInterface {
 
     @Override
     public void updatePart(String VIN, Part part) {
-        partsAPI.updatePart(VIN, part);
+        partsAPI.updatePart(part);
     }
 
     @Override
