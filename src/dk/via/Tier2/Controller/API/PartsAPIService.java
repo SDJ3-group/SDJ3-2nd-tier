@@ -1,6 +1,7 @@
 package dk.via.Tier2.Controller.API;
 
 import com.google.gson.Gson;
+import dk.via.Tier2.Model.Pallet;
 import dk.via.Tier2.Model.Part;
 import dk.via.Tier2.Model.SmallModels;
 import okhttp3.FormBody;
@@ -102,10 +103,16 @@ public class PartsAPIService extends APIService {
         //TODO ostatne
         System.out.println("Zavolala sa funkcia app part s paramtetrami: " + part.toString());
         String url = SmallModels.BASE_URL + "Cars/" + part.getCarId() + "/Parts";
+        Pallet suitablePallet = new PalletsAPIService().getSuitablePalletForPart(part);
+        System.out.println("Suitable pallet: " + suitablePallet.toString());
+        //   part.setPalletId(new PalletsAPIService().getSuitablePalletForPart(part).getId());
+
         try {
+            System.out.println("suitable pallet id:" + suitablePallet.getId());
             RequestBody formBody = new FormBody.Builder()
                     .add("Name", part.getName())
                     .add("Weight", String.valueOf(part.getWeight()))
+                    .add("PalletId", String.valueOf(suitablePallet.getId()))
                     .build();
 
             request = new Request.Builder()
@@ -114,7 +121,8 @@ public class PartsAPIService extends APIService {
                     .build();
 
             Response response = client.newCall(request).execute();
-            System.out.println(response.body().string());
+            System.out.println("executlo sa " + request.body().toString());
+            System.out.println("Nieco: " + response.body().string());
         } catch (IOException e) {
             e.printStackTrace();
         }

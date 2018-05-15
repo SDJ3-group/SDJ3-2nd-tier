@@ -2,24 +2,23 @@ package dk.via.Tier2.Model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Pallet extends BaseModel implements Serializable {
 
     private ArrayList<Part> Parts;
     private double MaximumCapacity;
-    private int RegistrationNo;
 
-    public Pallet(int id, ArrayList<Part> parts, double maximumCapacity, int registrationNo) {
+    public Pallet(int id, ArrayList<Part> parts, double maximumCapacity) {
         super(id);
         this.Parts = parts;
         this.MaximumCapacity = maximumCapacity;
-        this.RegistrationNo = registrationNo;
     }
 
-    public Pallet(int id, double maximumCapacity, int registrationNo) {
+    public Pallet(int id, double maximumCapacity) {
         super(id);
         this.MaximumCapacity = maximumCapacity;
-        this.RegistrationNo = registrationNo;
+        this.Parts = new ArrayList<>();
     }
 
     public void addPart(Part part) {
@@ -38,6 +37,10 @@ public class Pallet extends BaseModel implements Serializable {
         this.Parts = parts;
     }
 
+    public void setParts(Part[] parts) {
+        Parts.addAll(Arrays.asList(parts));
+    }
+
     public double getMaximumCapacity() {
         return MaximumCapacity;
     }
@@ -46,12 +49,14 @@ public class Pallet extends BaseModel implements Serializable {
         this.MaximumCapacity = maximumCapacity;
     }
 
-    public int getRegistrationNo() {
-        return RegistrationNo;
-    }
+    public double currentCapacity() {
+        double capacity = 0;
 
-    public void setRegistrationNo(int registrationNo) {
-        this.RegistrationNo = registrationNo;
+        for (Part part : Parts) {
+            capacity += part.getWeight();
+        }
+
+        return capacity;
     }
 
     @Override
@@ -59,7 +64,6 @@ public class Pallet extends BaseModel implements Serializable {
         return "Pallet{" +
                 "Parts=" + Parts +
                 ", MaximumCapacity=" + MaximumCapacity +
-                ", RegistrationNo=" + RegistrationNo +
                 '}';
     }
 }

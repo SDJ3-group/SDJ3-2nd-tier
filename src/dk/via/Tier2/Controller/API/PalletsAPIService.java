@@ -2,6 +2,7 @@ package dk.via.Tier2.Controller.API;
 
 import com.google.gson.Gson;
 import dk.via.Tier2.Model.Pallet;
+import dk.via.Tier2.Model.Part;
 import dk.via.Tier2.Model.SmallModels;
 import okhttp3.FormBody;
 import okhttp3.Request;
@@ -37,7 +38,7 @@ public class PalletsAPIService extends APIService {
             pallets = gson.fromJson(jsonData, Pallet[].class);
 
             for (Pallet pallet : pallets) {
-                System.out.println(pallet.getRegistrationNo());
+                System.out.println(pallet.getId());
             }
 
         } catch (IOException e) {
@@ -98,10 +99,11 @@ public class PalletsAPIService extends APIService {
 
     // POST api/Pallets             id: Integer, Parts: Collection of Part
     public void addPallet(Pallet pallet) {
-        //TODO treba dorobit colletion type
         String url = SmallModels.BASE_URL + "Pallets/";
         try {
             RequestBody formBody = new FormBody.Builder()
+                    .add("Id", String.valueOf(pallet.getId()))
+                    .add("MaximumCapacity", String.valueOf(pallet.getMaximumCapacity()))
                     .build();
 
             request = new Request.Builder()
@@ -121,6 +123,43 @@ public class PalletsAPIService extends APIService {
     public void deletePallet(Pallet pallet) {
         super.deleteObject("Pallets", pallet);
     }
+
+    public Pallet getSuitablePalletForPart(Part part) {
+        Pallet[] allPallets = getAllPallets();
+        PartsAPIService partsAPI = new PartsAPIService();
+
+        for (Pallet pallet : allPallets) {
+            Part[] parts = partsAPI.getPartsForPallet(pallet.getId());
+            System.out.println("Party: " + parts.length);
+            try {
+                pallet.setParts(parts);
+            } catch (NullPointerException e) {
+                System.out.println("Palleta je prazdna");
+            }
+
+        }
+
+        for (Pallet pallet : allPallets) {
+            if (pallet.getParts() == null) {
+                return pallet;
+            }
+            if (pallet.getParts().get(0).getName() == part.getName()) {
+                if ((pallet.getMaximumCapacity() - pallet.currentCapacity()) >= part.getWeight()) {
+                    return pallet;
+                } else
+                    System.out.println("Palle is not suitable");
+            }
+        }
+
+        Pallet newPallet = new Pallet(44, 1000);
+        addPallet(newPallet);
+
+        System.out.println("Should create new pallet");
+
+
+        return newPallet;
+    }
+
 
 
 }
