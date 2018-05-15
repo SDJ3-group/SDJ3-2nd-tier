@@ -113,7 +113,21 @@ public class PartsAPIService extends APIService {
                     .add("Name", part.getName())
                     .add("Weight", String.valueOf(part.getWeight()))
                     .add("PalletId", String.valueOf(suitablePallet.getId()))
+                    .add("CarId", part.getCarId())
                     .build();
+/*
+            MediaType textPlainMT = MediaType.parse("text/plain; charset=utf-8");
+            String helloMsg = "Hello OkHttp";
+
+            Request request = new Request.Builder().url("https://httpbin.org/post")
+                    .post(RequestBody.create(textPlainMT, helloMsg)).build();
+
+            Response response = client.newCall(request).execute();
+
+            assertTrue(response.isSuccessful());
+            response.close();
+
+             */
 
             request = new Request.Builder()
                     .url(url)
@@ -122,7 +136,7 @@ public class PartsAPIService extends APIService {
 
             Response response = client.newCall(request).execute();
             System.out.println("executlo sa " + request.body().toString());
-            System.out.println("Nieco: " + response.body().string());
+            System.out.println("Nieco: " + response.code());
         } catch (IOException e) {
             e.printStackTrace();
         }
