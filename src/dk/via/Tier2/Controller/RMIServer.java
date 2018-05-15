@@ -141,8 +141,8 @@ public class RMIServer extends UnicastRemoteObject implements RMIInterface {
     }
 
     @Override
-    public void addPart(String VIN, Part part) throws RemoteException {
-        partsAPI.addPartToCar(VIN, part);
+    public void addPart(Part part) throws RemoteException {
+        partsAPI.addPart(part);
     }
 
     @Override

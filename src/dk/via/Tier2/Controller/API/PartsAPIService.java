@@ -98,9 +98,9 @@ public class PartsAPIService extends APIService {
     }
 
     // POST api/Parts
-    public void addPartToCar(String carVIN, Part part) {
+    public void addPart(Part part) {
         //TODO ostatne
-        String url = SmallModels.BASE_URL + "Cars/" + carVIN + "/Parts";
+        String url = SmallModels.BASE_URL + "Cars/" + part.getCar().getVIN() + "/Parts";
         try {
             RequestBody formBody = new FormBody.Builder()
                     .add("Name", part.getName())

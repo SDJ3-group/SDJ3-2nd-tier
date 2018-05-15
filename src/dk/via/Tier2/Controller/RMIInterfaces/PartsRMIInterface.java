@@ -12,7 +12,7 @@ public interface PartsRMIInterface {
 
     void updatePart(String VIN, Part part) throws RemoteException;
 
-    void addPart(String VIN, Part part) throws RemoteException;
+    void addPart(Part part) throws RemoteException;
 
     void deletePart(Part part) throws RemoteException;
 
