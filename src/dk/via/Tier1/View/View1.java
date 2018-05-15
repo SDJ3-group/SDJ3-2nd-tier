@@ -35,7 +35,7 @@ class View1 extends View {
         System.out.println("write in the model");
         String model = keyboard.nextLine();
         System.out.println("write in the weight");
-        float weight = (float) numberReader.nextInt();
+        float weight =  numberReader.nextFloat();
         controller.registerCar(vinNo, model, weight);
         System.out.println(controller.getAllCars());
     }

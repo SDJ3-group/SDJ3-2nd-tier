@@ -35,7 +35,7 @@ public class View2 extends View {
         System.out.println("type in the parts name");
         String name = keyboard.nextLine();
         System.out.println("type in the parts weight");
-        float weight = (float) numberReader.nextInt();
+        float weight =numberReader.nextFloat();
         //System.out.println("type in the ID");
         //int id = keyboard.nextInt();
         Part partToBeRippedFromCar = controller.makePart(name, weight);

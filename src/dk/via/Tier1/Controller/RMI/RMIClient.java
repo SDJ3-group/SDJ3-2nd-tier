@@ -43,13 +43,14 @@ public class RMIClient extends UnicastRemoteObject {
         return null;
     }
     public static RMIClient getInstance(){
-        if (instance == null){
+        if (instance==null){
             try {
-                return new RMIClient();
+                instance = new RMIClient();
             } catch (RemoteException e) {
                 e.printStackTrace();
             }
         }
+        System.out.println("tot mas instance "+instance);
         return instance;
     }
     public RMIInterface getRmiService(){
