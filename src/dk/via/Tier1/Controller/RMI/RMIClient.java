@@ -15,8 +15,9 @@ public class RMIClient extends UnicastRemoteObject {
     private static final long serialVersionUID = 1L;
 
     private RMIInterface rmiInterface;
+    private static RMIClient instance = null;
 
-    public RMIClient() throws RemoteException {
+    private RMIClient() throws RemoteException {
         super();
 
     }
@@ -29,6 +30,7 @@ public class RMIClient extends UnicastRemoteObject {
             System.out.println("should be connected");
         } catch (NotBoundException | RemoteException | MalformedURLException e) {
             e.printStackTrace();
+            System.out.println("connection went wrong");
         }
     }
 
@@ -41,6 +43,19 @@ public class RMIClient extends UnicastRemoteObject {
             e.printStackTrace();
         }
         return null;
+    }
+    public static RMIClient getInstance(){
+        if (instance == null){
+            try {
+                return new RMIClient();
+            } catch (RemoteException e) {
+                e.printStackTrace();
+            }
+        }
+        return instance;
+    }
+    public RMIInterface getRmiService(){
+        return rmiInterface;
     }
 
 }

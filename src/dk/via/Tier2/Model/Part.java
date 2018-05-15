@@ -31,6 +31,11 @@ public class Part extends BaseModel implements Serializable {
         PreviousPalletId = previousPalletId;
         PackageId = packageId;
     }
+    public Part(int id,String name,double weight){
+        super(id);
+        this.Name =name;
+        this.Weight = weight;
+    }
 
     public String getName() {
         return Name;
